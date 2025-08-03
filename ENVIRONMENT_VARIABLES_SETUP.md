@@ -15,8 +15,8 @@ const client = new ImapFlow({
   port: 993,
   secure: true,
   auth: {
-    user: 'abhirajput6727@gmail.com',
-    pass: 'ujugdkfdegrsrphk' 
+    user: 'your-email@gmail.com',
+    pass: 'your-app-password' 
   }
 });
 ```
@@ -31,8 +31,8 @@ const client = new ImapFlow({
   port: parseInt(process.env.EMAIL_PORT || '993'),
   secure: true,
   auth: {
-    user: process.env.EMAIL_USER || 'abhirajput6727@gmail.com',
-    pass: process.env.EMAIL_PASSWORD || 'ujugdkfdegrsrphk' 
+    user: process.env.EMAIL_USER || '',
+    pass: process.env.EMAIL_PASSWORD || ''
   }
 });
 ```
@@ -41,7 +41,7 @@ const client = new ImapFlow({
 
 **Before:**
 ```typescript
-private genAI = new GoogleGenerativeAI('AIzaSyA_q2oX48qWpDZW1c8XJNLqIbdXyH30WT0')
+private genAI = new GoogleGenerativeAI('your-gemini-api-key')
 ```
 
 **After:**
@@ -49,7 +49,7 @@ private genAI = new GoogleGenerativeAI('AIzaSyA_q2oX48qWpDZW1c8XJNLqIbdXyH30WT0'
 // Load environment variables
 configDotenv();
 
-private genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'AIzaSyA_q2oX48qWpDZW1c8XJNLqIbdXyH30WT0')
+private genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 ```
 
 ### 3. Updated Setup Scripts

@@ -108,8 +108,8 @@ export async function markEmailAsRead(uid: number) {
     port: parseInt(process.env.EMAIL_PORT || '993'),
     secure: true,
     auth: {
-      user: process.env.EMAIL_USER || 'abhirajput6727@gmail.com',
-      pass: process.env.EMAIL_PASSWORD || 'ujugdkfdegrsrphk' 
+      user: process.env.EMAIL_USER || '',
+      pass: process.env.EMAIL_PASSWORD || ''
     }
   });
 
