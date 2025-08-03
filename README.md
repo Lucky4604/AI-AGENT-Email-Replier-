@@ -57,6 +57,57 @@
 - **Business Communication**: Generate professional email responses
 - **Personal Assistant**: Automate personal email responses
 
+## 🔄 System Architecture & Flow
+
+### AI Agent Email Processing Flow
+
+```mermaid
+graph TD
+    A[📧 Email Server<br/>Gmail IMAP] --> B[🔄 Email Reader Service<br/>Fetch Unread Emails]
+    B --> C{📋 Email Processing<br/>Every 60 seconds}
+    C --> D[📝 Parse Email Content<br/>Subject, Body, Sender]
+    D --> E[🤖 Gemini AI Service<br/>Generate Response]
+    E --> F[✉️ Email Sender Service<br/>SMTP Reply]
+    F --> G[✅ Mark Email as Read<br/>Update Flags]
+    G --> H[📊 Log Processing<br/>Store Results]
+    
+    I[👤 User Registration<br/>Auth Service] --> J[📧 Email Confirmation<br/>Send Welcome Email]
+    J --> K[🔐 Account Activation<br/>Enable Features]
+    
+    L[🌐 REST API<br/>Manual Triggers] --> M[POST /process-emails<br/>Manual Processing]
+    M --> C
+    
+    N[📱 Web Interface<br/>Dashboard] --> O[📈 View Statistics<br/>Monitor Activity]
+    
+    style A fill:#e1f5fe
+    style E fill:#f3e5f5
+    style F fill:#e8f5e8
+    style I fill:#fff3e0
+    style L fill:#fce4ec
+```
+
+### 🔧 Technical Components
+
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| **Email Reader** | IMAPFlow + MailParser | Fetch and parse incoming emails |
+| **AI Engine** | Google Gemini API | Generate intelligent responses |
+| **Email Sender** | Nodemailer + SMTP | Send automated replies |
+| **Authentication** | NestJS Auth | User registration & management |
+| **API Layer** | NestJS Controllers | RESTful endpoints |
+| **Scheduler** | NestJS Cron | Automated email processing |
+| **Database** | In-Memory/File | Store processing logs |
+
+### 📊 Processing Timeline
+
+1. **🕐 Every 60 seconds**: System checks for unread emails
+2. **📥 Fetch**: Retrieve unread emails from Gmail IMAP
+3. **🔍 Parse**: Extract email content, sender, and metadata
+4. **🤖 AI Processing**: Send content to Gemini AI for response generation
+5. **✉️ Send Reply**: Use SMTP to send AI-generated response
+6. **✅ Mark Read**: Update email flags to prevent reprocessing
+7. **📝 Log**: Store processing results for monitoring
+
 ## Project setup
 
 ### Option 1: Local Development Setup
