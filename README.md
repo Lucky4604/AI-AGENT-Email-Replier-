@@ -23,13 +23,206 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**AI Agent Email Replier** - An intelligent email automation system built with NestJS that automatically reads, processes, and responds to emails using Google's Gemini AI.
+
+### 🚀 Features
+
+- **🤖 AI-Powered Email Responses**: Uses Google Gemini AI to generate intelligent, contextual email replies
+- **📧 Automatic Email Processing**: Continuously monitors inbox for unread emails
+- **🔄 Real-time Processing**: Processes emails every minute with automatic response generation
+- **🔐 Secure Authentication**: User registration with email confirmation
+- **📱 RESTful API**: Complete API endpoints for email management and processing
+- **🐳 Docker Support**: Easy deployment with Docker and Docker Compose
+- **🔒 Environment-based Configuration**: Secure credential management
+
+### 🛠️ Tech Stack
+
+- **Backend**: NestJS (Node.js framework)
+- **AI**: Google Gemini API
+- **Email**: IMAP (reading) + SMTP (sending)
+- **Containerization**: Docker & Docker Compose
+- **Language**: TypeScript
+
+### 📋 API Endpoints
+
+- `GET /test-mail-service` - Test mail service injection
+- `POST /process-emails` - Manually trigger email processing
+- `POST /test-email` - Test email sending functionality
+- `POST /auth` - User registration with email confirmation
+
+### 🎯 Use Cases
+
+- **Customer Support Automation**: Automatically respond to common customer inquiries
+- **Email Management**: Process and organize incoming emails
+- **Business Communication**: Generate professional email responses
+- **Personal Assistant**: Automate personal email responses
 
 ## Project setup
+
+### Option 1: Local Development Setup
 
 ```bash
 $ npm install
 ```
+
+### Option 2: Docker Setup (Recommended)
+
+This project includes Docker support for easy deployment and consistent environments.
+
+#### Prerequisites
+
+1. **Install Docker**: 
+   - [Docker Desktop](https://www.docker.com/products/docker-desktop/) for Windows/Mac
+   - [Docker Engine](https://docs.docker.com/engine/install/) for Linux
+
+2. **Install Docker Compose** (usually included with Docker Desktop):
+   ```bash
+   # Verify Docker installation
+   docker --version
+   docker-compose --version
+   ```
+
+#### Quick Start with Docker
+
+1. **Clone and Setup**:
+   ```bash
+   git clone <your-repo-url>
+   cd ai-agent
+   ```
+
+2. **Configure Environment**:
+   ```bash
+   # Create .env file with your credentials
+   ./setup-env.sh
+   ```
+
+3. **Build and Run**:
+   ```bash
+   # Build and start the application
+   docker-compose up --build
+   
+   # Or run in detached mode
+   docker-compose up -d --build
+   ```
+
+4. **Access the Application**:
+   - Open your browser to `http://localhost:3000`
+   - API endpoints available at `http://localhost:3000/api`
+
+#### Docker Commands
+
+```bash
+# Start the application
+docker-compose up
+
+# Start in background
+docker-compose up -d
+
+# Stop the application
+docker-compose down
+
+# View logs
+docker-compose logs -f
+
+# Rebuild after code changes
+docker-compose up --build
+
+# Clean up containers and images
+docker-compose down --rmi all --volumes --remove-orphans
+```
+
+#### Docker Development Workflow
+
+For development with hot-reload:
+
+```bash
+# Start with volume mounting for live code changes
+docker-compose up --build
+
+# The application will automatically restart when you make code changes
+# thanks to the volume mount and NestJS watch mode
+```
+
+#### Production Docker Deployment
+
+For production deployment:
+
+1. **Update Dockerfile** (if needed):
+   ```dockerfile
+   # Change the CMD to production mode
+   CMD ["npm", "run", "start:prod"]
+   ```
+
+2. **Build and Deploy**:
+   ```bash
+   # Build production image
+   docker build -t ai-agent:latest .
+   
+   # Run production container
+   docker run -d -p 3000:3000 --env-file .env ai-agent:latest
+   ```
+
+#### Docker Environment Variables
+
+The Docker setup automatically loads environment variables from your `.env` file. Make sure your `.env` file contains:
+
+```env
+# Email Configuration (IMAP)
+EMAIL_HOST=imap.gmail.com
+EMAIL_PORT=993
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASSWORD=your-app-password
+
+# SMTP Configuration for sending emails
+MAIL_HOST=smtp.gmail.com
+SMTP_USERNAME=your-email@gmail.com
+SMTP_PASSWORD=your-app-password
+
+# Gemini API Configuration
+GEMINI_API_KEY=your-gemini-api-key
+
+# Application Configuration
+NODE_ENV=development
+PORT=3000
+```
+
+#### Troubleshooting Docker
+
+**Common Issues:**
+
+1. **Port already in use**:
+   ```bash
+   # Check what's using port 3000
+   lsof -i :3000
+   
+   # Change port in docker-compose.yml
+   ports:
+     - "3001:3000"  # Use port 3001 instead
+   ```
+
+2. **Permission issues**:
+   ```bash
+   # Fix file permissions
+   sudo chown -R $USER:$USER .
+   ```
+
+3. **Container not starting**:
+   ```bash
+   # Check container logs
+   docker-compose logs ai-agent
+   
+   # Check if .env file exists
+   ls -la .env
+   ```
+
+4. **Environment variables not loading**:
+   ```bash
+   # Verify .env file format
+   cat .env
+   
+   # Check if variables are loaded
+   docker-compose exec ai-agent env | grep EMAIL
+   ```
 
 ## Email Configuration
 
@@ -142,6 +335,41 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## Quick Start
+
+### 🚀 Get Started in 3 Steps
+
+1. **Clone and Setup**:
+   ```bash
+   git clone <your-repo-url>
+   cd ai-agent
+   ```
+
+2. **Configure Environment**:
+   ```bash
+   # Interactive setup (recommended)
+   ./setup-env.sh
+   
+   # Or manually create .env file
+   cp env.example .env
+   # Edit .env with your credentials
+   ```
+
+3. **Run with Docker**:
+   ```bash
+   docker-compose up --build
+   ```
+
+4. **Access the Application**:
+   - Open `http://localhost:3000`
+   - Test endpoints: `http://localhost:3000/test-mail-service`
+
+### 📋 Prerequisites
+
+- Docker and Docker Compose installed
+- Gmail account with App Password
+- Google Gemini API key
 
 ## License
 
