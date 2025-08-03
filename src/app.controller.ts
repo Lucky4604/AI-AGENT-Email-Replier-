@@ -16,6 +16,16 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Get('health')
+  getHealth() {
+    return { 
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      service: 'AI Agent Email Replier',
+      version: '1.0.0'
+    };
+  }
+
   @Get('test-mail-service')
   testMailService() {
     return { 

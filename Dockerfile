@@ -1,20 +1,38 @@
 # Use Node.js base image
-FROM node:22
+FROM node:22-alpine
 
 # Create app directory
 WORKDIR /app
 
-# Copy only package.json and lock file first (better cache)
+# Copy package files
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci --only=production
 
-# Copy the rest of the application code
+# Copy source code
 COPY . .
 
-# Expose the port NestJS runs on
+# Build the application
+RUN npm run build
+
+# Remove dev dependencies
+RUN npm prune --production
+
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nestjs -u 1001
+
+# Change ownership of the app directory
+RUN chown -R nestjs:nodejs /app
+USER nestjs
+
+# Expose port
 EXPOSE 3000
 
-# Run the NestJS application
-CMD ["npm", "run", "start:dev"]
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/health || exit 1
+
+# Start the application
+CMD ["npm", "run", "start:prod"]

@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: ai-agent-email-replier
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: EMAIL_HOST
+        value: imap.gmail.com
+      - key: EMAIL_PORT
+        value: 993
+      - key: MAIL_HOST
+        value: smtp.gmail.com
+      # Add your environment variables here:
+      # - key: EMAIL_USER
+      #   value: your-email@gmail.com
+      # - key: EMAIL_PASSWORD
+      #   value: your-app-password
+      # - key: SMTP_USERNAME
+      #   value: your-email@gmail.com
+      # - key: SMTP_PASSWORD
+      #   value: your-app-password
+      # - key: GEMINI_API_KEY
+      #   value: your-gemini-api-key 

@@ -1,0 +1,114 @@
+{
+  "info": {
+    "name": "AI Agent Email Replier API",
+    "description": "Complete API collection for testing AI Agent Email Replier endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://your-app-name.onrender.com",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the service is running and healthy"
+      },
+      "response": []
+    },
+    {
+      "name": "Test Mail Service",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/test-mail-service",
+          "host": ["{{baseUrl}}"],
+          "path": ["test-mail-service"]
+        },
+        "description": "Test if the mail service is properly injected and working"
+      },
+      "response": []
+    },
+    {
+      "name": "Process Emails",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/process-emails",
+          "host": ["{{baseUrl}}"],
+          "path": ["process-emails"]
+        },
+        "description": "Manually trigger email processing to fetch and respond to unread emails"
+      },
+      "response": []
+    },
+    {
+      "name": "Email Processing Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/email-processing-status",
+          "host": ["{{baseUrl}}"],
+          "path": ["email-processing-status"]
+        },
+        "description": "Check the current status of email processing"
+      },
+      "response": []
+    },
+    {
+      "name": "Reset Email Processing",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/reset-email-processing",
+          "host": ["{{baseUrl}}"],
+          "path": ["reset-email-processing"]
+        },
+        "description": "Reset the email processing state if it gets stuck"
+      },
+      "response": []
+    },
+    {
+      "name": "Clear Processed Cache",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/clear-processed-cache",
+          "host": ["{{baseUrl}}"],
+          "path": ["clear-processed-cache"]
+        },
+        "description": "Clear the cache of processed emails to allow reprocessing"
+      },
+      "response": []
+    },
+    {
+      "name": "Test Email Sending",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/test-email",
+          "host": ["{{baseUrl}}"],
+          "path": ["test-email"]
+        },
+        "description": "Send a test email to verify SMTP configuration"
+      },
+      "response": []
+    }
+  ]
+} 
